@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 
 import * as mongoose from 'mongoose';
+import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 
 @Module({
   imports: [
@@ -31,6 +32,6 @@ import * as mongoose from 'mongoose';
 // }
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    // consumer.apply(LoggerMiddleware).forRoutes('*');
+    consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }
