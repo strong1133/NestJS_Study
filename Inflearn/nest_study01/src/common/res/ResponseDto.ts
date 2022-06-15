@@ -1,34 +1,16 @@
-import {
-  CallHandler,
-  ExecutionContext,
-  Injectable,
-  NestInterceptor,
-} from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Timestamp } from '../utils/timestamp';
 
-export interface Response<T> {
-  timestamp: string;
+export class ResponseDto<T> {
+  readonly timestamp: string = new Timestamp(Date.now()).time;
   statusCode: string;
+  errFlag: boolean;
+  errMsg: string;
   data: T;
-}
-@Injectable()
-export class ResponseDto<T> implements NestInterceptor {
-  intercept(
-    context: ExecutionContext,
-    next: CallHandler,
-  ): Observable<Response<T>> {
-    console.log('RES INTERCEPTOR');
-    const http = context.switchToHttp();
-    const res = http.getResponse();
 
-    return next.handle().pipe(
-      map((data) => ({
-        timestamp: new Timestamp(Date.now()).time,
-        statusCode: res.statusCode,
-        data: data,
-      })),
-    );
+  constructor(statusCode: string, errFlag: boolean, errMsg: string, data: T) {
+    this.statusCode = statusCode ?? '200';
+    this.errFlag = errFlag ?? false;
+    this.errMsg = errMsg ?? '';
+    this.data = data;
   }
 }
