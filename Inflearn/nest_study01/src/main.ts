@@ -9,6 +9,7 @@ async function bootstrap() {
   console.log(PORT);
 
   app.useGlobalInterceptors(new ResponseInterceptor());
+  app.useGlobalInterceptors(new ErrorsInterceptor());
   // app.useGlobalFilters(new ErrorsInterceptor());
   await app.listen(PORT);
 }
