@@ -9,11 +9,6 @@ import { map } from 'rxjs/operators';
 import { Timestamp } from '../utils/timestamp';
 import { ResponseDto } from './responseDto';
 
-export interface Response<T> {
-  timestamp: string;
-  statusCode: string;
-  data: T;
-}
 @Injectable()
 export class ResponseInterceptor<T> implements NestInterceptor {
   intercept(

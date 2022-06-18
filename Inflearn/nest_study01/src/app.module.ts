@@ -7,6 +7,8 @@ import { CatsModule } from './cats/cats.module';
 
 import * as mongoose from 'mongoose';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
+import { APP_FILTER } from '@nestjs/core';
+import { AllExceptionsFilter } from './common/res/allExceptionsFiltter';
 
 @Module({
   imports: [
@@ -20,7 +22,13 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
     CatsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: AllExceptionsFilter,
+    // },
+  ],
 })
 // export class AppModule implements NestModule {
 //   private readonly isDev: boolean = process.env.MODE === 'dev' ? true : false;

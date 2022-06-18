@@ -1,16 +1,18 @@
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ErrorsInterceptor } from './common/res/errorInterceptor';
+import { AllExceptionsFilter } from './common/res/allExceptionsFiltter';
+
 import { ResponseInterceptor } from './common/res/responseInterceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const httpAdapter = app.get(HttpAdapterHost);
   const PORT = process.env.PORT;
   console.log(PORT);
 
   app.useGlobalInterceptors(new ResponseInterceptor());
-  app.useGlobalInterceptors(new ErrorsInterceptor());
-  // app.useGlobalFilters(new ErrorsInterceptor());
+  app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
+
   await app.listen(PORT);
 }
 bootstrap();
