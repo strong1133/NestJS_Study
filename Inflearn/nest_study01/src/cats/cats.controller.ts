@@ -7,6 +7,7 @@ import {
   UseFilters,
   UseInterceptors,
 } from '@nestjs/common';
+import { PositivePipe } from 'src/common/pipes/positivePipe';
 import { CatsService } from './cats.service';
 
 @Controller('cats')
@@ -21,9 +22,7 @@ export class CatsController {
   }
 
   @Get(':id')
-  getOneCat(@Param('id', ParseIntPipe) param: number) {
-    console.log('GET One Cats : ', param);
-    console.log(typeof param);
+  getOneCat(@Param('id', ParseIntPipe, PositivePipe) param: number) {
     return 'get one cat api';
   }
 
