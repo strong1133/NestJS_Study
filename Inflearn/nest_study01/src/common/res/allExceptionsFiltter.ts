@@ -13,6 +13,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
   constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
   catch(exception: any, host: ArgumentsHost): void {
+    // console.log('EXCEPTION CATCH');
     const { httpAdapter } = this.httpAdapterHost;
 
     const ctx = host.switchToHttp();
@@ -30,6 +31,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     httpAdapter.reply(
       ctx.getResponse(),
+
       new ResponseDto(httpStatus.toString(), true, exception.message, {}),
       httpStatus,
     );

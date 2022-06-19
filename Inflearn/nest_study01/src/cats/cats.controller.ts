@@ -23,7 +23,7 @@ export class CatsController {
 
   @Get(':id')
   getOneCat(@Param('id', ParseIntPipe, PositivePipe) param: number) {
-    return 'get one cat api';
+    return `get one cat api :: ${param}`;
   }
 
   @Post()

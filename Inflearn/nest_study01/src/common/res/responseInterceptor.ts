@@ -15,17 +15,20 @@ export class ResponseInterceptor<T> implements NestInterceptor {
     context: ExecutionContext,
     next: CallHandler,
   ): Observable<ResponseDto<T>> {
-    console.log('RES INTERCEPTOR');
+    // console.log('RES INTERCEPTOR BEFORE');
     const http = context.switchToHttp();
     const res = http.getResponse();
     return next.handle().pipe(
-      map((data) => ({
-        timestamp: new Timestamp(Date.now()).time,
-        statusCode: res.statusCode,
-        errFlag: false,
-        errMsg: '',
-        data: data,
-      })),
+      map((data) =>
+        // console.log('RES INTERCEPTOR AFTER'),
+        ({
+          timestamp: new Timestamp(Date.now()).time,
+          statusCode: res.statusCode,
+          errFlag: false,
+          errMsg: '',
+          data: data,
+        }),
+      ),
     );
   }
 }
