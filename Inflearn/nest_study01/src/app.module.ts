@@ -22,13 +22,7 @@ import { AllExceptionsFilter } from './common/res/allExceptionsFiltter';
     CatsModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    // {
-    //   provide: APP_FILTER,
-    //   useClass: AllExceptionsFilter,
-    // },
-  ],
+  providers: [AppService],
 })
 // export class AppModule implements NestModule {
 //   private readonly isDev: boolean = process.env.MODE === 'dev' ? true : false;

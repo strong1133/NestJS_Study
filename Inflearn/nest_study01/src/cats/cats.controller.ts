@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put } from '@nestjs/common';
+import { Controller, Get, HttpException, Post, Put } from '@nestjs/common';
 import {
   Delete,
   Param,
@@ -16,12 +16,14 @@ export class CatsController {
   @Get()
   getAllCat() {
     console.log('Hello Cats Controller');
+    throw new HttpException('api, is broken', 401);
     return { cats: 'get all cats Api' };
   }
 
   @Get(':id')
-  getOneCat(@Param('id') param: number) {
+  getOneCat(@Param('id', ParseIntPipe) param: number) {
     console.log('GET One Cats : ', param);
+    console.log(typeof param);
     return 'get one cat api';
   }
 
