@@ -13,12 +13,7 @@ import { AllExceptionsFilter } from './common/res/allExceptionsFiltter';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(process.env.DB_PATH, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }),
+    MongooseModule.forRoot(process.env.DB_PATH),
     CatsModule,
   ],
   controllers: [AppController],
