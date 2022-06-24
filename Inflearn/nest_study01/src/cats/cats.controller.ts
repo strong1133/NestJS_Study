@@ -1,14 +1,7 @@
-import { Controller, Get, HttpException, Post, Put } from '@nestjs/common';
-import {
-  Delete,
-  Param,
-  ParseIntPipe,
-  Patch,
-  UseFilters,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { PositivePipe } from 'src/common/pipes/positivePipe';
 import { CatsService } from './cats.service';
+import { CatRequestDto } from './dto/catsRequestDto';
 
 @Controller('cats')
 export class CatsController {
@@ -20,8 +13,9 @@ export class CatsController {
   }
 
   @Post()
-  async singUp() {
-    return 'singUp';
+  async singUp(@Body() body: CatRequestDto) {
+    console.log(body);
+    return body;
   }
 
   @Post('login')
