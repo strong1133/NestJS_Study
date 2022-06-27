@@ -14,8 +14,7 @@ export class CatsController {
 
   @Post()
   async singUp(@Body() body: CatRequestDto) {
-    console.log(body);
-    return body;
+    return this.catsService.singUp(body); /*  */
   }
 
   @Post('login')
