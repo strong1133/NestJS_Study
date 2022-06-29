@@ -15,6 +15,10 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ResponseInterceptor()); // Response Dto
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter)); // Global Exception
 
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  });
   await app.listen(PORT);
 }
 bootstrap();
